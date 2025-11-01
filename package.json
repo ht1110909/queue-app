@@ -1,0 +1,23 @@
+{
+  "name": "queueline",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "App for people to queue in virtual line - /index.html Join page -/ticket.html Ticket page -/admin.html Staff controls -/ join.js Small script for index.html -/ticket.js Polls position/status for a code -/admin.js Calls admin APIs, refreshes queue list -/ styles.css Minimal shared styles",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon --watch . server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^12.4.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
