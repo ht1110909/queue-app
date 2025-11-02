@@ -2,5 +2,5 @@
 .env*
 .DS_Store
 node_modules/
-queue.db
+queue.db*
 *.log
