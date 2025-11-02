@@ -27,7 +27,7 @@ db.exec(migrateSQL);
 // --- utilities & DB helpers ---
 function genCode(){
     //Make a short, human-typeable ticket code
-    return Math.random().toString(36).slice(2,8).toUpperCase;
+    return Math.random().toString(36).slice(2,8).toUpperCase();
 }
 
 function publicParty(p){
@@ -82,7 +82,8 @@ app.post('/api/join', joinLimiter, (req, res) => {
         code = genCode();
     }
 
-    db.prepare("INSERT INTO parties (code, name, size, sushi) VALUES (?, ?, ?)").run(code, name, size, sushi);
+    // Ensure we only bind allowed primitive types to SQLite
+    db.prepare("INSERT INTO parties (code, name, size, sushi) VALUES (?, ?, ?, ?)").run(code, String(name), Number(size), String(sushi));
 
     const ticket_url = `/ticket.html?code=${code}`;
     return res.status(201).json({ code, ticket_url});
@@ -107,7 +108,7 @@ app.get('/api/ticket/:code', (req, res) => {
     });
 });
 
-app.get('/api/queue', (req, res) => {
+app.get('/api/queue', requireAdmin, (req, res) => {
     const queue = getQueue().map(publicParty);
     return res.json({ queue });
 });
@@ -123,7 +124,7 @@ app.post('/api/advance', requireAdmin, (req, res) => {
 
     db.prepare(
         "UPDATE parties SET status='called', called_at=CURRENT_TIMESTAMP WHERE id=?"
-    ).get(waiting.id);
+    ).run(waiting.id);
 
     return res.json({ message: `Called ${waiting.name} (${waiting.code}).`});
 });
@@ -146,7 +147,13 @@ app.post('/api/serve_called', requireAdmin, (req, res) => {
 });
 
 app.post('/api/cancel/:code', requireAdmin, (req, res) => {
-    return res.status(501).json({ error: 'Not implemented yet (cancel)'})
+    const code = (req.params.code || '').toUpperCase();
+    const p =db.prepare("SELECT * FROM parties WHERE code=?").get(code);
+
+    if(!p) return res.json({ message: 'Code not found'});
+
+    db.prepare("UPDATE parties SET status='canceled' WHERE code=?").run(code);
+    return res.json({ message: `Canceled ${p.name}.`});
 });
 
 app.listen(PORT, () => {
