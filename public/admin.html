@@ -3,11 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin - Queue</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
-<body script src="admin.js">
-<h1>
-    This is Admin page
-</h1>
+<body>
+<h1>This is Admin page</h1>
+
+<div class="card">
+    <div class="row">
+        <input id="key" type="password" placeholder="Admin key">
+        <button id="saveKeyBtn" type="button">Save Key</button>
+        <span id="keyMsg" class="ok"></span>
+    </div>
+    <div class="row" style="margin-top:8px">
+        <button id="callBtn" type="button">Call Next</button>
+        <button id="serveBtn" type="button">Serve Called</button>
+        <input id="cancelCode" type="text" placeholder="Code to cancel/no-show" />        <button id="callBtn" type="button">Call Next</button>
+        <button id="cancelBtn" type="button">Cancel</button>
+        <span id="actMsg" class="ok"></span>
+    </div>
+</div>
+
+<div class="card">
+    <div class="row">
+        <h2 style="margin-right: auto">Current Queue</h2>
+        <span id="last" class="badge">-</span>
+    </div>
+    <table class="table">
+        <thead><tr><th>#</th><th>Name</th><th>Party</th><th>Status</th><th>Code</th></tr></thead>
+        <tbody id="rows"></tbody>
+    </table>
+</div>
+<script src="/admin.js"></script>
 </body>
 </html>

@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Ticket</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
-<body scirpt src="ticket.js">
-<h1>
-    This is ticket page
-</h1>
+<body>
+    <h1 class = "center">Your ticket</h1>
+
+    <div class = "card center">
+        <div>Code</div>
+        <div id = "code" class = "big badge">-</div>
+    </div>
+
+    <div class="card center">
+        <div>Status</div>
+        <div id="status" class="big">-</div>
+        <div style="margin-top:8px">Position: <span id="position" class="badge">-</span></div>
+        <div style="margin-top: 12px;">
+            <button id="refreshBtn" type="button">Refresh</button>
+            <span id="msg" class="err"></span>
+        </div>
+    </div>
+
+
+<script src="/ticket.js"></script>
 </body>
 </html>

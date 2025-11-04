@@ -1,0 +1,19 @@
+:root { --pad: 14px; --radius: 12px; --gap: 10px; --font: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+* { box-sizing: border-box; }
+body { font-family: var(--font); margin: 0; padding: 24px; max-width: 640px; }
+h1, h2 { margin: 0 0 12px; }
+.card { border: 1px solid #e5e7eb; border-radius: var(--radius); padding: var(--pad); margin: 12px 0; }
+label { display: block; margin: 8px 0 4px; }
+input[type="text"], input[type="number"], input[type="password"] {
+  width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: var(--radius);
+}
+button { padding: 10px 14px; border: 0; border-radius: var(--radius); background: #111827; color: #fff; cursor: pointer; }
+button[disabled] { opacity: 0.6; cursor: not-allowed; }
+.row { display: flex; gap: var(--gap); align-items: center; flex-wrap: wrap; }
+.ok { color: #065f46; }
+.err { color: #b91c1c; }
+.badge { display: inline-block; padding: 4px 8px; border-radius: 999px; background: #f3f4f6; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { text-align: left; padding: 8px; border-bottom: 1px solid #f3f4f6; }
+.big { font-size: 28px; font-weight: 700; }
+.center { text-align: center; }

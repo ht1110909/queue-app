@@ -3,11 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Join the Queue</title>
+    <link rel="stylesheet" href="/styles.css" >
 </head>
-<body scirpt src="public/server.js">
-<h1>
-    This is front end page
-</h1>
+<body>
+    <h1>Join the Food Line</h1>
+
+    <div class="card">
+        <form id="joinForm">
+            <label for="name">First name</label>
+            <input id="name" type="text" maxlength="50" required placeholder="e.g., Hana">
+
+            <label for="size">Party size</label>
+            <input id="size" type="number" min="1" max="4" value="1"required>
+
+            <label for="sushi">Favorite Sushi (you will need this to checkin)</label>
+            <select id="sushi" name="sushi" required>
+                <option value="">--- choose one ---</option>
+                <option value="salmon">Salmon</option>
+                <option value="tuna">Tuna</option>
+                <option value="eel">Eel</option>
+                <option value="veggie">Veggie</option>
+                <option value="shrimp">Shrimp</option>
+            </select>
+
+            <div class="row" style="margin-top: 10px;">
+                <button id="joinBt" type="submit">Join Queue</button>
+                <span id="msg" class="err"></span>
+            </div>
+        </form>
+    </div>
+
+    <div id="ticketCard" class="card" style="display:none">
+        <h2>You're in!</h2>
+        <p>Your code: <span id="code" class="badge"></span></p>
+        <div class="row">
+            <a id="ticketLink" href="#"><button>Open my ticket</button></a>
+            <button id="copyBtn" type="button">Copy code</button>
+        </div>
+        <p class="ok">Tip: bookmark the ticket page to check your place.</p>
+    </div>
+
+    <script src="/join.js" defer></script>
 </body>
 </html>

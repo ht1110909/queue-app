@@ -12,6 +12,8 @@ const __dirname  = path.dirname(__filename);
 const ADMIN_KEY = process.env.ADMIN_KEY || 'secret';
 const PORT = process.env.PORT || 3000;
 
+const SUSHI_CHOICES = ['Salmon', 'Tuna', 'Eel', 'Veggie', 'Shrimp'];
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
@@ -74,7 +76,9 @@ app.post('/api/join', joinLimiter, (req, res) => {
     if (!Number.isFinite(size) || size < 1 || size > 5) {
         return res.status(400).json({ error: 'Party size must be between 1 and 5'});
     }
+    sushi = (sushi || '').toLowerCase().trim();
     if (!sushi) return res.status(400).json({error: 'Sushi required'});
+    if(!SUSHI_CHOICES.includes(sushi)) sushi = null;
 
     //---ToDo: maybe set a limit for how many people can be in the queue?---//
     let code = genCode();
