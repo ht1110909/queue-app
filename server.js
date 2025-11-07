@@ -12,7 +12,7 @@ const __dirname  = path.dirname(__filename);
 const ADMIN_KEY = process.env.ADMIN_KEY || 'secret';
 const PORT = process.env.PORT || 3000;
 
-const SUSHI_CHOICES = ['Salmon', 'Tuna', 'Eel', 'Veggie', 'Shrimp'];
+const SUSHI_CHOICES = ['salmon', 'tuna', 'eel', 'veggie', 'shrimp'];
 
 const app = express();
 app.use(express.json());
@@ -25,6 +25,13 @@ db.pragma('synchronouns = NORMAL');
 
 const migrateSQL = fs.readFileSync(path.join(__dirname, 'db', 'migrate.sql'), 'utf8');
 db.exec(migrateSQL);
+
+const cols = db.prepare("PRAGMA table_info(parties)").all();
+const hasSushi = cols.some(c => c.name === 'sushi_choice');
+if (!hasSushi) {
+  db.exec("ALTER TABLE parties ADD COLUMN sushi_choice TEXT");
+}
+
 
 // --- utilities & DB helpers ---
 function genCode(){

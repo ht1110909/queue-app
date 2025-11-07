@@ -7,6 +7,7 @@ const card = $(`#ticketCard`);
 const codeEl = $(`#code`);
 const copyBtn = $(`#copyBtn`);
 const ticketLink = $(`#ticketLink`);
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     msg.textContent = '';

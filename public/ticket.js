@@ -7,6 +7,7 @@ const statusEl = $('#status');
 const posEl = $('#position');
 const msg = $('#msg');
 const refreshBtn = $('#refreshBtn');
+const sushiEl = $('#sushi');
 
 codeEl.textContent = code ||'-';
 
@@ -30,6 +31,7 @@ async function load() {
 
         statusEl.textContent = data.status.toUpperCase();
         posEl.textContent = data.position == null ? '-' : data.position;
+        sushiEl.textContent = data.sushi ? data.sushi.toUpperCase() : '—';
 
         if(data.status == 'called'){
             document.title = 'CALLED - Your ticket';
